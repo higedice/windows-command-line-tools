@@ -14,12 +14,12 @@
 
 
 void printUsage(void);
-void printError(const char *s);
+void printError(const char *command, const char *s);
 HINSTANCE doBackGround(const char *command, const char *opt);
 
 
 
-#define PROGRAM_NAME "startbg.exe"
+#define PROGRAM_NAME "startbg"
 #define MAX_OPTION_LENGTH 1024
 #define MAX_MSG_LENGTH 1024
 
@@ -39,7 +39,7 @@ long main(int argc, char* argv[])
 
 	for ( i = 2, len = 1; i < argc; i++ ) {
 		if ( strlen(argv[i]) +  len + 1  > MAX_OPTION_LENGTH ) {
-			printError("Too Long Command.");
+			printError("Error", "Too Long Command.");
 			return -1;
 		}
 
@@ -56,66 +56,66 @@ long main(int argc, char* argv[])
 
 	switch ( (int)h ) {
 		case 0:
-			printError("メモリまたはリソースが不足しています。");
+			printError(argv[1], "メモリまたはリソースが不足しています。");
 			break;
 		case ERROR_FILE_NOT_FOUND:
-			printError("指定されたファイルが見つかりませんでした。");
+			printError(argv[1], "指定されたファイルが見つかりませんでした。");
 			break;
 		case ERROR_PATH_NOT_FOUND:
-			printError("指定されたパスが見つかりませんでした。");
+			printError(argv[1], "指定されたパスが見つかりませんでした。");
 			break;
 		case ERROR_BAD_FORMAT:
-			printError(".exe ファイルが無効です。Win32 の .exe ではないか、.exe イメージ内にエラーがあります。");
+			printError(argv[1], ".exe ファイルが無効です。Win32 の .exe ではないか、.exe イメージ内にエラーがあります。");
 			break;
 		case SE_ERR_ACCESSDENIED:
-			printError("オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。");
+			printError(argv[1], "オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。");
 			break;
 		case SE_ERR_ASSOCINCOMPLETE:
-			printError("ファイル名の関連付けが不完全または無効です。");
+			printError(argv[1], "ファイル名の関連付けが不完全または無効です。");
 			break;
 		case SE_ERR_DDEBUSY:
-			printError("ほかの DDE トランザクションが現在処理中なので、DDE トランザクションを完了できませんでした。");
+			printError(argv[1], "ほかの DDE トランザクションが現在処理中なので、DDE トランザクションを完了できませんでした。");
 			break;
 		case SE_ERR_DDEFAIL:
-			printError("DDE トランザクションが失敗しました。");
+			printError(argv[1], "DDE トランザクションが失敗しました。");
 			break;
 		case SE_ERR_DDETIMEOUT:
-			printError("要求がタイムアウトしたので、DDE トランザクションを完了できませんでした。");
+			printError(argv[1], "要求がタイムアウトしたので、DDE トランザクションを完了できませんでした。");
 			break;
 		case SE_ERR_DLLNOTFOUND:
-			printError("指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。");
+			printError(argv[1], "指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。");
 			break;
 		/*
 		case SE_ERR_FNF:		// ERROR_FILE_NOT_FOUND と同じようだ。
-			printError("指定されたファイルが見つかりませんでした。");
+			printError(argv[1], "指定されたファイルが見つかりませんでした。");
 			break;
 		*/
 		case SE_ERR_NOASSOC:
-			printError("指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
+			printError(argv[1], "指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
 						"印刷可能ではないファイルを印刷しようとした場合も、このエラーが返ります。");
 			break;
 		case SE_ERR_OOM:
-			printError("操作を完了するのに十分なメモリがありません。");
+			printError(argv[1], "操作を完了するのに十分なメモリがありません。");
 			break;
 		/*
 		case SE_ERR_PNF:	// ERROR_PATH_NOT_FOUND と同じようだ
-			printError("指定されたパスが、見つかりませんでした。");
+			printError(argv[1], "指定されたパスが、見つかりませんでした。");
 			break;
 		*/
 		case SE_ERR_SHARE:
-			printError("共有違反が発生しました。");
+			printError(argv[1], "共有違反が発生しました。");
 			break;
 		default:
 			sprintf(errMsg, "想定しないエラーが発生しました。エラー番号：%d", (int)h);
-			printError(errMsg);
+			printError(argv[1], errMsg);
 	}
 
 	return -1;
 }
 
 
-void printError(const char *s) {
-	fprintf(stderr, "%s: %s\n", PROGRAM_NAME, s);
+void printError(const char *command, const char *msg) {
+	fprintf(stderr, "%s: %s: %s\n", PROGRAM_NAME, command, msg);
 }
 
 
