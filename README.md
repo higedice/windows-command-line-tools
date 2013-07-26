@@ -1,7 +1,11 @@
-windows-command-line-tools
+﻿Windows-command-line-tools
 ==========================
 
 Small command line tools for Windows.
+
+
+ - Compiled Binary files: <https://skydrive.live.com/redir?resid=FCAD8DC6EA8FBDDF!439>
+ - Source files: <https://github.com/higedice/windows-command-line-tools>
 
 
 
