@@ -43,6 +43,8 @@ rename_files.rb
 
 Ruby インタプリタが必要ですが、それを同梱した実行ファイルも配布しています。ただし、動作が遅くなります。
 
+*BUG* : 同じファイルを複数回指定すると、ファイル名の変更大賞かの確認と変更がその回数だけ行われます。
+
     Usage: ruby rename_files.rb PATTERN NEW_STRING <directorys>... <files>...
 
     This program *CANNOT* UNDO!
