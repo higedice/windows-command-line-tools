@@ -2,7 +2,8 @@
 	2010/05/15 new
 	2010/06/05 Sleep中に1秒ごとに文字を印字するオプションを追加
 	2010/07/02 使い方メッセージに作者のブログのURLを追加
-	2012/03024 Linux と Mac OS X に対応
+	2012/03/24 Linux と Mac OS X に対応
+	2013/08/29 Usage の "Second" を "Number of Seconds" へ変更。
 
 	http://d.hatena.ne.jp/higedice/
 */
@@ -90,7 +91,7 @@ void printError(const char *s) {
 
 void printUsage(void) {
 	fprintf(stderr, "\n");
-	fprintf(stderr, "Usage: sleepsec [Second] [Progress Charactor]\n");
+	fprintf(stderr, "Usage: sleepsec [Number of Seconds] [Progress Charactor]\n");
 	fprintf(stderr, "\n");
 	fprintf(stderr, "http://d.hatena.ne.jp/higedice/ \n");
 }
