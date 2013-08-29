@@ -28,7 +28,9 @@ UNIX のシェルのように、最後にアンパサンド（&）を打つと�
 
     Usage: startbg [command] [options]
     
-    This program runs another following Windows execute file in the background like an ampersand (&) is at the end of the command line on UNIX shells.
+    This program runs another following Windows execute file 
+    in the background like an ampersand (&) is at the end of 
+    the command line on UNIX shells.
     
     The called process runs in the current directory.
     So that directory is *ROCKED* while the sub process is running.
