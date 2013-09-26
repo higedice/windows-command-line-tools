@@ -1,11 +1,8 @@
 #!/usr/local/bin/ruby
 #
-#  rename_files.rb
+#  erename_files.rb
 #
-#  2013/07/13	new
-#		Is it better to get all filenames to rename first and then
-#		rename?
-#
+
 
 
 $PRONGRAM_VERSION = '2.0.0'
@@ -23,9 +20,9 @@ Search for PATTERN in files and each one's name in target directorys and
 replace to NEW_STRING.
 PATTERN is an extended regular expression.
 
-Example: ruby rename_files.rb "foto of " "" path/to/* "foto of 2013-07-12.jpg"
+Example: ruby erename_files.rb "foto of " "" path/to/* "foto of 2013-07-12.jpg"
 
- rename_files.rb version #{$PRONGRAM_VERSION}
+ erename_files.rb version #{$PRONGRAM_VERSION}
   source:	<https://github.com/higedice/windows-command-line-tools>
 
  #{$PRONGRAM_DATE}
