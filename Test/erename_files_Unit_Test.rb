@@ -21,8 +21,7 @@ FileUtils.touch "test-tmp-abcabc.txt"
 Dir.chdir ".."
 
 
-
-puts `ruby rename_files.rb abc ABC . test-tmp-d1/`
+puts `ruby erename_files.rb abc ABC * test-tmp-d1/*`
 
 if FileTest.exists? "test-tmp-ABCABC.txt" then
 	puts "Test 0001-01: OK"
@@ -59,7 +58,7 @@ else
 end
 
 
-s = 'ruby rename_files.rb "あ{3}" a . '.encode("Shift_JIS")
+s = 'ruby erename_files.rb "あ{3}" a * '.encode("Shift_JIS")
 puts `#{s}`
 
 
@@ -72,7 +71,7 @@ end
 
 
 
-s = 'ruby rename_files.rb "あ" b "test-tmp-あいうえお.txt"'.encode("Shift_JIS")
+s = 'ruby erename_files.rb "あ" "b" "test-tmp-あいうえお.txt"'.encode("Shift_JIS")
 puts `#{s}`
 
 
@@ -91,7 +90,21 @@ end
 
 
 
-puts `ruby rename_files.rb d1 d2 test-tmp-d1`
+FileUtils.touch "test-tmp-abb.txt"
+
+puts `ruby erename_files.rb "ab" "aa" * *`
+
+if FileTest.exists? "test-tmp-aab.txt" then
+	puts "Test 0004-01: OK"
+else
+	puts "Test 0004-01: NG"
+end
+
+
+
+
+
+puts `ruby erename_files.rb d1 d2 test-tmp-d1`
 
 
 

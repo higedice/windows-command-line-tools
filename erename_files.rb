@@ -8,14 +8,14 @@
 #
 
 
-$PRONGRAM_VERSION = '1.0.0'
-$PRONGRAM_DATE = '2013/07/13'
+$PRONGRAM_VERSION = '2.0.0'
+$PRONGRAM_DATE = '2013/09/18'
 
 
 
 def print_usage
   $stderr.puts <<EOS
-Usage: ruby rename_files.rb PATTERN NEW_STRING <directorys>... <files>... 
+Usage: ruby erename_files.rb PATTERN NEW_STRING <files>... 
 
 This program *CANNOT* UNDO!
 
@@ -23,7 +23,7 @@ Search for PATTERN in files and each one's name in target directorys and
 replace to NEW_STRING.
 PATTERN is an extended regular expression.
 
-Example: ruby rename_files.rb "foto of " "" . path/to/ "foto of 2013-07-12.jpg"
+Example: ruby rename_files.rb "foto of " "" path/to/* "foto of 2013-07-12.jpg"
 
  rename_files.rb version #{$PRONGRAM_VERSION}
   source:	<https://github.com/higedice/windows-command-line-tools>
@@ -45,7 +45,7 @@ def rename_file(file_orig, file_new)
     File.rename(file_orig, file_new)
     puts 'Changed: ' + file_orig + ' -> ' + file_new
   rescue => err
-    $stderr.puts 'Erorr: ' + err.message
+    $stderr.puts 'Erorr: ' + file_orig + ': ' + err.message
   end
 end
 
@@ -59,29 +59,22 @@ if ARGV.size < 3
 end
 
 
+done = {}
 exp_from = ARGV.shift
 str_to = ARGV.shift
 
 
 ARGV[0..-1].each do |f|
 
-  f = f == '.' ? './' : f
-
-  if not File.directory? f	# File
+  if File.directory? f		# Directory
+    $stderr.puts f + ' is a directory.'
+  else				# File
     f_new = File.join(File.dirname(f), File.basename(f).gsub(/#{exp_from}/, str_to))
     f = File.join(File.dirname(f), File.basename(f))
-    rename_file(f, f_new) unless f_new == f
-  elsif f =~ /[\/\\]$/		# Directory with name ends '/' OR '\'
-    Dir.foreach(f) do |f_orig|
-      if File.directory? f_orig
-        $stderr.puts f_orig + ' is a directory.' unless f_orig =~ /^\.\.?$/
-      else
-        f_new = f_orig.gsub(/#{exp_from}/, str_to)
-        rename_file(f + f_orig, f + f_new) unless f_new == f_orig
-      end
+    if f_new != f and not done.key? f then
+      rename_file(f, f_new)
+      done[f] = true
     end
-  else				# Directory with name does not ends '/' OR '\'.
-    $stderr.puts f + ' is a directory.'
   end
 
 end
