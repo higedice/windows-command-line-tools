@@ -36,23 +36,22 @@ UNIX のシェルのように、最後にアンパサンド（&）を打つと�
     So that directory is *ROCKED* while the sub process is running.
 
 
-rename_files.rb
+erename_files.rb
 -------------
 
 コマンドプロンプトから一括で複数ファイルの名前を変更をします。正規表現が使えます。iPhone の写真をドロップボックス経由で PC に取り込んだ後に「写真 」で始まるファイル名を変更するときなどに役立ちます。
 
 Ruby インタプリタが必要ですが、それを同梱した実行ファイルも配布しています。ただし、動作が遅くなります。
 
-*BUG* : 同じファイルを複数回指定すると、ファイル名の変更大賞かの確認と変更がその回数だけ行われます。
 
-    Usage: ruby rename_files.rb PATTERN NEW_STRING <directorys>... <files>...
+    Usage: ruby erename_files.rb PATTERN NEW_STRING <directorys>... <files>...
 
     This program *CANNOT* UNDO!
 
     Search for PATTERN in files and each one's name in target directorys and replace to NEW_STRING.
     PATTERN is an extended regular expression.
 
-    Example: ruby rename_files.rb "foto of " "" . path/to/ "foto of 2013-07-12.jpg"
+    Example: ruby rename_files.rb "foto of " "" . path/to/* "foto of 2013-07-12.jpg"
 
 
 License
